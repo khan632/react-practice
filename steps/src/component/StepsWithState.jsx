@@ -18,6 +18,22 @@ const [data, setData] = useState(defaultData);
 data = value;
 setData = method to update the data
 state is a hook inside a react and it always calls on the top of the component
+
+
+Mechanics of react:
+1. we don't do direct DOM manipulation in react. [React is declarative framework]
+2. How component View updated in react than ?
+  a. In React, a view is updated by re-rendering the component.
+  b. A component is re-rendered when its state is updated or change.
+  c. So, to update a View in react we update a state.
+3. example:
+    event handle --> update state --> it re-render/ render the view --> than view is updated by help of state
+
+STATE GUIDELINES:
+1. Each component has and manage its own state, no matter how many times we render the same component.
+2. Each state inside a component is independent of the other state.
+3. UI = fn(state1, state2, ...), UI in react is all about changing State time to time.
+4. We describe that reflection of data using state, event handlers, and JSX
 */
 
 import React, { useState } from 'react'
@@ -28,13 +44,20 @@ const StepsWithState = () => {
   const [step, setStep] = useState(1)
     function handlePrevious() {
       if(step > 1) {
-        //updating the state
-        setStep(step - 1)
+        //correct way to updating the state
+        setStep((currState) => currState - 1)
+        // Wrong way to update state based on current state value
+        // setStep(step - 1);
+        // setStep(step - 1);
       }
     }
     function handleNext() {
       if(step < 3) {
-        setStep(step + 1)
+        //correct way to updating the state
+        setStep((currState) => currState + 1)
+        // Wrong way to update state based on current state value
+        // setStep(step + 1)
+        // setStep(step + 1)
       }
     }
   
