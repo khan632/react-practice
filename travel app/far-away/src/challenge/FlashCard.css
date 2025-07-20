@@ -1,0 +1,31 @@
+.body-class {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    padding: 20px;
+}
+
+.flashcard {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.flashcard div {
+    border: 1px solid #a2a0a0;
+    background-color: #f7f7f7;
+    border-radius: 7px;
+    aspect-ratio: 2 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+}
+
+div.selected {
+    border: 1px solid #e03131;
+    background-color: #cd5252;
+    color: aliceblue;
+    font-weight: bolder;
+}
