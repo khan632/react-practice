@@ -12,15 +12,20 @@ export default function App () {
   // when we pass both setter fn and state to child this is also known as child to parent data flow
     const [item, setItem] = useState([]);
 
-    function handleAddItem(item) {
+  function handleAddItem(item) {
     setItem((items) => [...items, item]);
   }
+
+  function handleDeleteItem(id) {
+    setItem((items) => items.filter((item) => item.id !== id));
+  }
+
 
   return(
     <div className="app">
       <Logo />
       <Form onHandleAddItem={handleAddItem} />
-      <PackingList items={item} />
+      <PackingList items={item} onHandleDeleteItem={handleDeleteItem} />
       <Stats />
     </div>
     // <FlashCard />
