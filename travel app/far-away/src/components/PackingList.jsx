@@ -1,12 +1,12 @@
 import React from 'react'
-import { initialItems } from '../constant'
+// import { initialItems } from '../constant'
 
-const PackingList = () => {
+const PackingList = ({ items }) => {
   return (
     <div className="list">
         <ul className='overflow-hidden'>
             {
-                initialItems.map((item) => <Item item={item} />)
+                items.map((item) => <Item item={item} />)
             }
         </ul>
     </div>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import FlashCard from "./challenge/FlashCard";
 import Form from "./components/Form";
 import Logo from "./components/Logo";
@@ -5,14 +6,24 @@ import PackingList from "./components/PackingList";
 import Stats from "./components/Stats";
 
 export default function App () {
+  // whole useState and handleItem function move out from form component 
+  // to parent component so that there children should use Data 
+  // this process called lifting up the state 
+  // when we pass both setter fn and state to child this is also known as child to parent data flow
+    const [item, setItem] = useState([]);
+
+    function handleAddItem(item) {
+    setItem((items) => [...items, item]);
+  }
+
   return(
-    // <div className="app">
-    //   <Logo />
-    //   <Form />
-    //   <PackingList />
-    //   <Stats />
-    // </div>
-    <FlashCard />
+    <div className="app">
+      <Logo />
+      <Form onHandleAddItem={handleAddItem} />
+      <PackingList items={item} />
+      <Stats />
+    </div>
+    // <FlashCard />
   )
 }
 
