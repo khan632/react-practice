@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 // import { initialItems } from '../constant'
 
 const PackingList = ({ items, onHandleDeleteItem, onUpdateItem }) => {
+  const [sortedBy, setSortedBy] = useState("input");
+
+  let sortedItem;
+
+  if (sortedBy === "input") sortedItem = items;
+  if (sortedBy === "description")
+    sortedItem = items
+      .slice()
+      .sort((a, b) => a.description.localeCompare(b.description));
+  if (sortedBy === "packed")
+    sortedItem = items
+      .slice()
+      .sort((a, b) => Number(a.packed) - Number(b.packed));
   return (
     <div className="list">
       <ul className="overflow-hidden">
-        {items.map((item) => (
+        {sortedItem.map((item) => (
           <Item
             item={item}
             key={item.id}
@@ -14,6 +27,13 @@ const PackingList = ({ items, onHandleDeleteItem, onUpdateItem }) => {
           />
         ))}
       </ul>
+      <div className="actions">
+        <select value={sortedBy} onChange={(e) => setSortedBy(e.target.value)}>
+          <option value="input">Sort by input order</option>
+          <option value="description">Sort by description</option>
+          <option value="packed">Sort by packed status</option>
+        </select>
+      </div>
     </div>
   );
 };
