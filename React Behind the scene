@@ -54,6 +54,10 @@ React execute each instances and each of them will return own one or more react 
 
 Component -------> Compoenent Instance ------> React Elements -----> DOM Element (HTML) -----> Painted onto the screen by browser
 
+call component as <MyComponent />
+but not like this MyComponent() XXX reason react will not look this like a component instance will not be inside component tree, 
+                                    and independent state of this component will move inside parent component
+
 =========================================== VITUAL DOM ========================================================================================
 It uses Viratual DOM: It is a representation of actual DOM in objects.
 VIRTUAL DOM REPRESENTATION:
