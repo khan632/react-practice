@@ -1,1 +1,58 @@
+React work Behind efficiently uses diff alorithm to find out the differnece between old virtaul DOM and virtual DOM it create during updating and update the differnece.
+
+It uses Viratual DOM: It is a representation of actual DOM in objects.
+==============================================================================================================================================================================================================
+It work in three phase.
+
+Phase 1: 
+Initail Rendering and State change:
+  React create a virtual represntation of our Component tree. when state changes or update occur on UI, react create a new virtual DOM tree.
+
+Phase 2:
+Diffing Algorithm:
+  React compare(Differnce) the new Virtual DOM tree with the previous one.
+
+Phase 3:
+Re-conciliation: React calculate minimum changes needed and update only the parts of real DOM that actually require to change.
+
+===============================================================================================================================================================================================================
+
+Feature of React Fibre in react working:
+1. The goal of react fibre is to increase its sustainbility.
+
+===============================================================================================================================================================================
+
+2. It's main feature is Incremental Rendering means "The ability to split rendering work into chunks and spread it out over multiple frame rather than blocking the main thread with one large rendering operation."
+
+=================================================================== THE PROBLEM SOLVE BY INCREMENTAK RENDERING ======================================================
+    
+      In traditional React (before React 16), when a component tree needed to update, React would:
+    1. Start at the root and work its way down
+    2. Process the entire component tree in one synchronous operation
+    3. Block the main thread until all work was complete
+
+      This could cause performance issues like:
+    1. Janky animations
+    2. Unresponsive user interactions
+    3. Dropped frames (below 60fps)
+
+============================================================================ How Incremental Rendering Works =============================================================
+    React breaks rendering work into units of work that can be:
+        1. Paused: Stop mid-way through rendering
+        2. Resumed: Continue where it left off
+        3. Prioritized: Handle high-priority work first
+        4. Discarded: Abandon work if it becomes irrelevant
+
+                The Fiber reconciler can:
+                        1. Track work in progress
+                        2. Assign priorities to different types of updates
+                        3. Interrupt and resume work as needed
+This is different from the old "stack reconciler" which had to complete all work synchronously once started. 
+The key insight is that React now treats rendering as interruptible work rather than an atomic operation, leading to much smoother and more responsive applications.
+
+===============================================================================================================================================================================
+
+3. Other key features include the ability to pause, abort, or reuse work as new updates come in; the ability to assign priority to different types of updates; and new concurrency primitives.
+
+ABILITY TO PAUSE:
 
