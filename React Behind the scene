@@ -1,5 +1,59 @@
 React work Behind efficiently uses diff alorithm to find out the differnece between old virtaul DOM and virtual DOM it create during updating and update the differnece.
 
+=====================================================================================================================================================
+
+                                        COMPONENT vs INSTANCES vs ELEMENT
+
+COMPOENENTS:
+1. Description of a piece of a UI
+2. A component is a function that return React elements (element Tree), Usually written as JSX.
+3. you can call "BluePrint" or "Template"
+4. Exmple:
+                                                funtion Tabs ({ items }) {
+                                                  return (
+                                                      <div className="tab-content">
+                                                        <h4>All contacts</h4>
+                                                        <p>Your post will be visible</p>
+                                                      </div>
+                                                    );
+                                                  }
+
+
+COMPONENT INSTANCES:
+when we call or use component multiple time in our app than it become instances of that component.
+1. Example:
+                                                funtion App () {
+                                                  return (
+                                                      <> // it create three instances of Tab component
+                                                        <Tabs items={content[0]}/>
+                                                        <Tabs items={content[1]}/>
+                                                        <Tabs items={content[2]}/>
+                                                      </>
+                                                    );
+                                                  }
+2. Instance are created when we use the components
+3. Actual physical "menifestion" of a components.
+4. Each instance will have its own state, props.
+5. each instance will have own lifecycle.
+
+ELEMENTS:
+React execute each instances and each of them will return own one or more react elements.
+1. JSX Convert to React.creatElement() function call.
+2. A react element is the result of these funcntion calls.
+3. Information necessary to create DOM element.
+4. Example:
+                                                            function Tabs({ items }) {
+                                                              return React.createElement(
+                                                                'div',
+                                                                { className: 'tab-content' },
+                                                                React.createElement('h4', null, 'All contacts'),
+                                                                React.createElement('p', null, 'Your post will be visible')
+                                                              );
+                                                            }
+
+
+Component -------> Compoenent Instance ------> React Elements -----> DOM Element (HTML) -----> Painted onto the screen by browser
+
 =========================================== VITUAL DOM ========================================================================================
 It uses Viratual DOM: It is a representation of actual DOM in objects.
 VIRTUAL DOM REPRESENTATION:
@@ -31,6 +85,24 @@ Phase 3:
 Re-conciliation: React calculate minimum changes needed and update only the parts of real DOM that actually require to change.
 
 =======================================================================================================================================================
+
+Eaxmple:
+                                                // When this state changes...
+                                                  const [count, setCount] = useState(0);
+                                                  
+                                                  // React creates a new Virtual DOM representation
+                                                  return (
+                                                    <div>
+                                                      <h1>Count: {count}</h1>  // Only this text node gets updated
+                                                      <button onClick={() => setCount(count + 1)}>
+                                                        Increment
+                                                      </button>
+                                                    </div>
+                                                  );
+
+When count changes from 0 to 1, React doesn't re-create the entire div, h1, or button elements. It only updates the text content inside the h1 tag.
+
+======================================================================================================================================================
 
 Feature of React Fibre in react working:
 1. The goal of react fibre is to increase its sustainbility.
