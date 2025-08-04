@@ -60,6 +60,7 @@ but not like this MyComponent() XXX reason react will not look this like a compo
 
 =========================================== VITUAL DOM ========================================================================================
 It uses Viratual DOM: It is a representation of actual DOM in objects.
+In Virtual DOM when a parent component update than all its children component will also update as well
 VIRTUAL DOM REPRESENTATION:
 
 // Simplified Fiber node structure
@@ -86,7 +87,7 @@ Diffing Algorithm:
   React compare(Differnce) the new Virtual DOM tree with the previous one.
 
 Phase 3:
-Re-conciliation: React calculate minimum changes needed and update only the parts of real DOM that actually require to change.
+Re-conciliation: Deciding Which DOM Elements actually need to be inserted, deleted or updated, in order to reflect the latest state change.
 
 =======================================================================================================================================================
 
@@ -221,3 +222,26 @@ NEW CONCURRENCY PRIMITIVES
 These are the APIs that leverage Fiber's capabilities:
       1. <Suspense></Suspense> {can Suspend rendering}
       2. startTransition method { Can refer to non-urgent task}, etc
+
+==================================================================================================================================
+
+React never touch the DOM, React only render, it will never know about where will this data will display.
+Its ReactDOM which commit on the brower what react render on updation of state, not React
+
+==================================================================================================================================
+
+Initial commit or update of component ==> Render phase ==> Commit phase
+
+RENDER PHASE:
+
+update React Element -> create new virtual DOM + current Fiber tree -> use reconciliation+diff -> updated fibre tree -> list of DOM updated 
+this reconciliation is done by re-conciler which work with immutuable data sturcture called fibre tree, in this tree for each react element there is a 
+fibre which hold data + queue execution of that node, this queue will update the DOM element and this happen using diffing algorithm.
+
+This render pahse is asynchronous means it can paused, resume, abort component accoding to there importance
+
+COMMIT Phase: 
+all list of DOM will shown on UI
+
+this commit phase will be done synchronously, to keep ui consitance
+
