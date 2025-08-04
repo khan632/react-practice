@@ -245,3 +245,41 @@ all list of DOM will shown on UI
 
 this commit phase will be done synchronously, to keep ui consitance
 
+=================================================================================================================================
+
+HOW DIFFING WORK:
+work on 2 assumptions:
+1. two elements of differnt types will produce different trees
+2. Element with stable key prop stays the same across render
+
+Diffing algo work in 2 senario
+
+1. Same position, Differnet element
+eaxmple:
+
+<div>                                  <header>
+  <SearchBar />        ==>                <SearchBar />   
+</div>                                 </header>
+<div>...</div>                         <div>...</div>
+
+In above senario,
+react assumes entire sub-tree is no longer valid
+old component will destryed and removed from DOM, including state
+tree might be rebuilt if children stayed same
+
+2. same position same element
+
+example
+
+<div className = "hidden">                                  <div className="active">
+  <SearchBar />                      ==>                        <SearchBar />   
+</div>                                                      </div>
+<div>...</div>                                              <div>...</div>
+
+In above senario,
+Element will kept, including state
+New props/attributes will passed if they changed between render
+Sometime this is not what we want... Then we use the key props
+                                          
+
+
